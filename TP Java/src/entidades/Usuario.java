@@ -1,18 +1,18 @@
 package entidades;
 
 public abstract class Usuario {
-	int dni;
+	String dni;
 	String nombre;
 	String apellido;
 	String mail;
 	String password;
 	String telefono;
 	
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(int dni) {
-		this.dni = dni;
+	public void setDni(String string) {
+		this.dni = string;
 	}
 	public String getNombre() {
 		return nombre;
@@ -44,4 +44,6 @@ public abstract class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	
+	
 }

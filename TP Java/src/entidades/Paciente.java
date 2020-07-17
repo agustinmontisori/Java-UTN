@@ -2,7 +2,7 @@ package entidades;
 import java.util.Date;
 
 public class Paciente extends Usuario{
-	enum TipoGenero{
+	public enum TipoGenero{
 		Masculino,
 		Femenino
 	}
@@ -14,6 +14,7 @@ public class Paciente extends Usuario{
 	float imc;
 	int metabolismoBasal;
 	float pesoObjetivo;
+	String objetivo;
 	public TipoGenero getGenero() {
 		return genero;
 	}
@@ -56,6 +57,17 @@ public class Paciente extends Usuario{
 	public void setPesoObjetivo(float pesoObjetivo) {
 		this.pesoObjetivo = pesoObjetivo;
 	}
+	public String getObjetivo() {
+		return objetivo;
+	}
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
 	
+	@Override
+	public String toString() {
+		return "\nPaciente [id=" + "documento=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", email=" + mail + ", tel=" + telefono + "]";
+	}
 	
 }

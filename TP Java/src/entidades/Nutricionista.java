@@ -21,7 +21,7 @@ public class Nutricionista extends Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Nutricionista [dni="+ dni + ", nombre=" + nombre + ", apellido=" + apellido
+		return "\nNutricionista [dni="+ dni + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", email=" + email + ", tel=" + telefono + "]";
 	}
 }

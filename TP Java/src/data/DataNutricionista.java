@@ -74,6 +74,7 @@ public class DataNutricionista {
 				n = new Nutricionista();
 				n.setApellido(rs.getString("apellido"));
 				n.setNombre(rs.getString("nombre"));
+				n.setDni(nut.getDni());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -95,7 +96,8 @@ public class DataNutricionista {
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select dni, nombre, apellido, cod_postal, denominacion, calle, altura from localidad l " + 
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select n.dni, n.nombre, n.apellido, l.cod_postal, l.denominacion, d.calle, d.altura " +
+					"from localidad l " + 
 					"inner join direccion d on d.cod_postal = l.cod_postal " + 
 					"inner join nutricionista n on n.dni = d.id_nutricionista " + 
 					"where l.denominacion = ?");

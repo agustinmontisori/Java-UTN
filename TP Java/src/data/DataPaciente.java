@@ -33,7 +33,7 @@ public class DataPaciente {
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
-					p.setMail(rs.getString("email"));
+					p.setEmail(rs.getString("email"));
 					p.setTelefono(rs.getString("telefono"));
 					p.setPassword(rs.getString("password"));
 					

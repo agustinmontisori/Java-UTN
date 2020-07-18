@@ -9,10 +9,19 @@ public class Principal {
 		AbmcNutricionista abmcN = new AbmcNutricionista();
 //		LinkedList<Paciente> pacientes = ul.getAll();
 //		System.out.println(pacientes);
-		Localidad loc = new Localidad();
-		loc.setDenominacion("Rosario");
-		LinkedList<Nutricionista> nutricionistas = abmcN.getByLocalidad(loc);
-		System.out.println(nutricionistas);
+		
+		Nutricionista nut = new Nutricionista();
+		nut.setDni("22222225");
+		nut.setApellido("Martin");
+		nut.setNombre("Moreli");
+		nut.setEmail("martin@gmail.com");
+		nut.setTelefono("3460 3331233");
+		nut.setPassword("martin");
+	
+		abmcN.add(nut);
+		
+		Nutricionista n2 = abmcN.getByDni(nut);
+		System.out.println(n2);
 	}
 }
 	

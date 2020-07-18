@@ -67,7 +67,7 @@ public class Paciente extends Usuario{
 	@Override
 	public String toString() {
 		return "\nPaciente [id=" + "documento=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + mail + ", tel=" + telefono + "]";
+				+ ", email=" + email + ", tel=" + telefono + "]";
 	}
 	
 }

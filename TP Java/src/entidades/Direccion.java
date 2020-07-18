@@ -2,7 +2,7 @@ package entidades;
 
 public class Direccion {
 	private String calle;
-	private int numero;
+	private int altura;
 	private int piso;
 	private String depto;
 	private Localidad localidad;
@@ -25,11 +25,11 @@ public class Direccion {
 	public void setCalle(String calle) {
 		this.calle = calle;
 	}
-	public int getNumero() {
-		return numero;
+	public int getAltura() {
+		return altura;
 	}
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setAltura(int altura) {
+		this.altura = altura;
 	}
 	public int getPiso() {
 		return piso;

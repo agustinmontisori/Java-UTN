@@ -1,8 +1,9 @@
 package entidades;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Nutricionista extends Usuario {
-	Date horarioAtencion;
+	ArrayList<HorarioAtencion> horariosAtencion;
 	String nombre;
 	String apellido;
 	String email;
@@ -48,13 +49,11 @@ public class Nutricionista extends Usuario {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
-
-	public Date getHorarioAtencion() {
-		return horarioAtencion;
-	}
-
-	public void setHorarioAtencion(Date horarioAtencion) {
-		this.horarioAtencion = horarioAtencion;
-	}
 	
+	public void setHorariosAtencion(ArrayList<HorarioAtencion> horarios) {
+		this.horariosAtencion = horarios;
+	}
+	public ArrayList<HorarioAtencion> getHorariosAtencion() {
+		return horariosAtencion;
+	}
 }

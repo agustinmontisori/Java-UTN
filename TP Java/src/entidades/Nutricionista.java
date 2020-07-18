@@ -1,46 +1,9 @@
 package entidades;
-import java.util.Date;
 import java.util.ArrayList;
 
 public class Nutricionista extends Usuario {
 	ArrayList<HorarioAtencion> horariosAtencion;
-	String nombre;
-	String apellido;
-	String email;
-	String telefono;
 	Direccion direccion;
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
 
 	public Direccion getDireccion() {
 		return direccion;
@@ -59,6 +22,6 @@ public class Nutricionista extends Usuario {
 	@Override
 	public String toString() {
 		return "Nutricionista [dni="+ dni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + mail + ", tel=" + telefono + "]";
+				+ ", email=" + email + ", tel=" + telefono + "]";
 	}
 }

@@ -4,7 +4,7 @@ public abstract class Usuario {
 	String dni;
 	String nombre;
 	String apellido;
-	String mail;
+	String email;
 	String password;
 	String telefono;
 	
@@ -26,11 +26,11 @@ public abstract class Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 	public void setMail(String mail) {
-		this.mail = mail;
+		this.email = mail;
 	}
 	public String getPassword() {
 		return password;

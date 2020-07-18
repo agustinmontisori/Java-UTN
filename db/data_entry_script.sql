@@ -32,9 +32,9 @@ insert into paciente (dni, nombre, apellido, email, password, telefono, genero, 
 	values ('11111113', 'martin', 'moreno', 'martin@gmail.com', 'martin', '556456', 'masculino', '20050130', 165, 57, 12, 2150, 70, 'aumentar masa muscular');
 select * from paciente;
     
-insert into nutricionista (dni, nombre, apellido, password) values ('22222221', 'laura', 'merlo', 'laura');
-insert into nutricionista (dni, nombre, apellido, password) values ('22222222', 'martina', 'moron', 'martina');
-insert into nutricionista (dni, nombre, apellido, password) values ('22222223', 'juan', 'mendez', 'juan');
+insert into nutricionista (dni, nombre, apellido, password, email, telefono) values ('22222221', 'laura', 'merlo', 'laura', 'laura@gmail.com', '341 22313222');
+insert into nutricionista (dni, nombre, apellido, password, email, telefono) values ('22222222', 'martina', 'moron', 'martina', 'martina@gmail.com','341 4134243');
+insert into nutricionista (dni, nombre, apellido, password, email, telefono) values ('22222223', 'juan', 'mendez', 'juan', 'juan@gmail.com', '341 5543445');
 select * from nutricionista;
 
 insert into nutricionista_paciente (id_nutricionista, id_paciente, fecha) values ('22222221', '11111111', 20201202);
@@ -117,13 +117,13 @@ insert into horario (id_nutricionista, dia, hora_desde, hora_hasta) values ('222
 insert into horario (id_nutricionista, dia, hora_desde, hora_hasta) values ('22222223', 'viernes', 100000, 103000);
 select * from horario;
 
-insert into localidad (cod_postal, nombre) values (2000, 'Rosario');
-insert into localidad (cod_postal, nombre) values (2113, 'Peyrano');
+insert into localidad (cod_postal, denominacion) values (2000, 'Rosario');
+insert into localidad (cod_postal, denominacion) values (2113, 'Peyrano');
 select * from localidad;
 
-insert into direccion (cod_postal, numero, calle, id_nutricionista) values (2000, 1300, 'Zeballos', '22222221');
-insert into direccion (cod_postal, numero, calle, id_nutricionista) values (2113, 200, 'Av. San Martin', '22222222');
-insert into direccion (cod_postal, numero, calle, id_nutricionista) values (2000, 2213, 'Corrientes', '22222223');
+insert into direccion (cod_postal, altura, calle, id_nutricionista) values (2000, 1300, 'Zeballos', '22222221');
+insert into direccion (cod_postal, altura, calle, id_nutricionista) values (2113, 200, 'Av. San Martin', '22222222');
+insert into direccion (cod_postal, altura, calle, id_nutricionista) values (2000, 2213, 'Corrientes', '22222223');
 select * from direccion;
 
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111111', 1, curdate(), 'merienda', 3);
@@ -135,3 +135,13 @@ insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) v
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111113', 1, curdate(), 'almuerzo', 5);
 select * from consumo_paciente;
 
+
+select n.dni, n.nombre, n.apellido, n.email, n.telefono, d.cod_postal, d.calle, l.denominacion, d.numero, d.piso, d.depto
+from nutricionista n
+inner join direccion d on d.id_nutricionista = n.dni 
+inner join localidad l on d.cod_postal = l.cod_postal;
+
+select dni, nombre, apellido, denominacion, calle, altura from localidad l
+inner join direccion d on d.cod_postal = l.cod_postal
+inner join nutricionista n on n.dni = d.id_nutricionista
+where l.cod_postal = 2000;

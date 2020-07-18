@@ -118,7 +118,7 @@ CREATE TABLE `direccion` (
   `id_nutricionista` varchar(45) NOT NULL,
   `cod_postal` int unsigned NOT NULL,
   `calle` varchar(45) NOT NULL,
-  `numero` int unsigned NOT NULL,
+  `altura` int unsigned NOT NULL,
   `piso` varchar(45) DEFAULT NULL,
   `depto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_nutricionista`,`cod_postal`),
@@ -225,7 +225,7 @@ DROP TABLE IF EXISTS `localidad`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `localidad` (
   `cod_postal` int unsigned NOT NULL,
-  `nombre` varchar(45) NOT NULL,
+  `denominacion` varchar(45) NOT NULL,
   PRIMARY KEY (`cod_postal`),
   UNIQUE KEY `cod_postal_UNIQUE` (`cod_postal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -253,6 +253,8 @@ CREATE TABLE `nutricionista` (
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`dni`),
   UNIQUE KEY `matricula_UNIQUE` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -264,7 +266,7 @@ CREATE TABLE `nutricionista` (
 
 LOCK TABLES `nutricionista` WRITE;
 /*!40000 ALTER TABLE `nutricionista` DISABLE KEYS */;
-INSERT INTO `nutricionista` VALUES ('22222221','laura','merlo','laura'),('22222222','martina','moron','martina'),('22222223','juan','mendez','juan');
+INSERT INTO `nutricionista` VALUES ('22222221','laura','merlo','laura','341 22313222','laura@gmail.com'),('22222222','martina','moron','martina','341 4134243','martina@gmail.com'),('22222223','juan','mendez','juan','341 5543445','juan@gmail.com');
 /*!40000 ALTER TABLE `nutricionista` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,4 +515,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-18 11:38:22
+-- Dump completed on 2020-07-18 18:01:25

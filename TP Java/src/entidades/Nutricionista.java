@@ -56,4 +56,9 @@ public class Nutricionista extends Usuario {
 	public ArrayList<HorarioAtencion> getHorariosAtencion() {
 		return horariosAtencion;
 	}
+	@Override
+	public String toString() {
+		return "Nutricionista [dni="+ dni + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", email=" + mail + ", tel=" + telefono + "]";
+	}
 }

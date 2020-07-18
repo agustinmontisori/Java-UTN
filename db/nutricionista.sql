@@ -37,8 +37,8 @@ CREATE TABLE `alimento` (
   UNIQUE KEY `id_alimento_UNIQUE` (`id_alimento`),
   KEY `fk_alimento_unidad_idx` (`id_unidad_medida`),
   KEY `fk_alimento_categoria_idx` (`id_categoria`),
-  CONSTRAINT `fk_alimento_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_alimento_unidad` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidad_medida` (`id_unidad_medida`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_alimento_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_alimento_unidad` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidad_medida` (`id_unidad_medida`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,8 +92,8 @@ CREATE TABLE `consumo_paciente` (
   `cantidad` int unsigned NOT NULL,
   PRIMARY KEY (`id_paciente`,`id_alimento`,`fecha`,`tipo`),
   KEY `fk_consumo_alimento_idx` (`id_alimento`),
-  CONSTRAINT `fk_consumo_alimento` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_consumo_alimento` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,8 +123,8 @@ CREATE TABLE `direccion` (
   `depto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_nutricionista`,`cod_postal`),
   KEY `fk_direccion_localidad_idx` (`cod_postal`),
-  CONSTRAINT `fk_direccion_localidad` FOREIGN KEY (`cod_postal`) REFERENCES `localidad` (`cod_postal`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_direccion_localidad` FOREIGN KEY (`cod_postal`) REFERENCES `localidad` (`cod_postal`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -202,7 +202,7 @@ CREATE TABLE `horario` (
   `hora_desde` time NOT NULL,
   `hora_hasta` time DEFAULT NULL,
   PRIMARY KEY (`id_nutricionista`,`dia`,`hora_desde`),
-  CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -284,8 +284,8 @@ CREATE TABLE `nutricionista_paciente` (
   PRIMARY KEY (`fecha`,`id_paciente`,`id_nutricionista`),
   KEY `fk_nutricionista_paciente_2_idx` (`id_paciente`),
   KEY `fk_nutricionista_paciente_1_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -351,8 +351,8 @@ CREATE TABLE `paciente_ejercicio` (
   `intensidad` varchar(45) NOT NULL,
   PRIMARY KEY (`id_paciente`,`id_ejercicio`,`fecha`),
   KEY `fk_paciente_ejercicio_2_idx` (`id_ejercicio`),
-  CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_paciente_ejercicio_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_paciente_ejercicio_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -379,8 +379,8 @@ CREATE TABLE `paciente_estado_animo` (
   `fecha` date NOT NULL,
   PRIMARY KEY (`id_paciente`,`id_estado_animo`,`fecha`),
   KEY `fk_paciente_estado_animo_2_idx` (`id_estado_animo`),
-  CONSTRAINT `fk_paciente_estado_animo_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_paciente_estado_animo_2` FOREIGN KEY (`id_estado_animo`) REFERENCES `estado_animo` (`id_estado_animo`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_paciente_estado_animo_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_paciente_estado_animo_2` FOREIGN KEY (`id_estado_animo`) REFERENCES `estado_animo` (`id_estado_animo`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -410,8 +410,8 @@ CREATE TABLE `plan` (
   UNIQUE KEY `id_plan_UNIQUE` (`id_plan`),
   KEY `fk_plan_paciente_idx` (`id_paciente`),
   KEY `fk_plan_nutricionista_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -421,7 +421,7 @@ CREATE TABLE `plan` (
 
 LOCK TABLES `plan` WRITE;
 /*!40000 ALTER TABLE `plan` DISABLE KEYS */;
-INSERT INTO `plan` VALUES (1,'2020-07-18','11111111','22222221'),(2,'2020-07-18','11111112','22222222'),(3,'2020-07-18','11111113','22222223');
+INSERT INTO `plan` VALUES (2,'2020-07-18','11111112','22222222'),(3,'2020-07-18','11111113','22222223');
 /*!40000 ALTER TABLE `plan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -438,8 +438,8 @@ CREATE TABLE `plan_alimento` (
   PRIMARY KEY (`id_alimento`,`id_plan`),
   KEY `fk_plan_alimento_alimento_idx` (`id_alimento`),
   KEY `fk_plan_alimento_2_idx` (`id_plan`),
-  CONSTRAINT `fk_plan_alimento_1` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_plan_alimento_2` FOREIGN KEY (`id_plan`) REFERENCES `plan` (`id_plan`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_plan_alimento_1` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_plan_alimento_2` FOREIGN KEY (`id_plan`) REFERENCES `plan` (`id_plan`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -449,7 +449,7 @@ CREATE TABLE `plan_alimento` (
 
 LOCK TABLES `plan_alimento` WRITE;
 /*!40000 ALTER TABLE `plan_alimento` DISABLE KEYS */;
-INSERT INTO `plan_alimento` VALUES (1,1),(1,2),(2,1),(3,2),(3,3);
+INSERT INTO `plan_alimento` VALUES (1,2),(3,2),(3,3);
 /*!40000 ALTER TABLE `plan_alimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,8 +466,8 @@ CREATE TABLE `solicitud` (
   `estado` varchar(45) DEFAULT 'Pendiente',
   PRIMARY KEY (`id_paciente`,`id_nutricionista`),
   KEY `fk_solicitud_nutricionista_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -515,4 +515,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-18 18:01:25
+-- Dump completed on 2020-07-18 19:19:45

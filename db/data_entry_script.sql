@@ -134,14 +134,3 @@ insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) v
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111113', 1, curdate(), 'otro', 5);
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111113', 1, curdate(), 'almuerzo', 5);
 select * from consumo_paciente;
-
-
-select n.dni, n.nombre, n.apellido, n.email, n.telefono, d.cod_postal, d.calle, l.denominacion, d.numero, d.piso, d.depto
-from nutricionista n
-inner join direccion d on d.id_nutricionista = n.dni 
-inner join localidad l on d.cod_postal = l.cod_postal;
-
-select dni, nombre, apellido, denominacion, calle, altura from localidad l
-inner join direccion d on d.cod_postal = l.cod_postal
-inner join nutricionista n on n.dni = d.id_nutricionista
-where l.cod_postal = 2000;

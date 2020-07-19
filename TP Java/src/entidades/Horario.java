@@ -1,6 +1,6 @@
 package entidades;
 import java.sql.Time;
-public class HorarioAtencion {
+public class Horario {
 	private Time horaDesde;
 	private Time horaHasta;
 	private String dia;

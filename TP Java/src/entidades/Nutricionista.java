@@ -2,7 +2,7 @@ package entidades;
 import java.util.ArrayList;
 
 public class Nutricionista extends Usuario {
-	ArrayList<HorarioAtencion> horariosAtencion;
+	ArrayList<Horario> horarios;
 	Direccion direccion;
 
 	public Direccion getDireccion() {
@@ -13,11 +13,11 @@ public class Nutricionista extends Usuario {
 		this.direccion = direccion;
 	}
 	
-	public void setHorariosAtencion(ArrayList<HorarioAtencion> horarios) {
-		this.horariosAtencion = horarios;
+	public void setHorarios(ArrayList<Horario> horarios) {
+		this.horarios = horarios;
 	}
-	public ArrayList<HorarioAtencion> getHorariosAtencion() {
-		return horariosAtencion;
+	public ArrayList<Horario> getHorariosAtencion() {
+		return horarios;
 	}
 	@Override
 	public String toString() {

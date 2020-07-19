@@ -33,10 +33,6 @@ public class AbmcNutricionista {
 		dn.update(nut);
 	}
 	
-	public void updateDireccion(Nutricionista nut) {
-		dn.updateDireccion(nut);
-	}
-	
 	public void remove(Nutricionista nut) {
 		dn.remove(nut);
 	}

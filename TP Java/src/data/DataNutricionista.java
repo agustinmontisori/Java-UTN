@@ -91,16 +91,21 @@ public class DataNutricionista {
 	}
 	
 	public LinkedList<Nutricionista> getByLocalidad(Localidad loc){
+		
+		// recibe una localidad, devuelve todos los nutricionistas registrados en esa localidad.
+		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select n.dni, n.nombre, n.apellido, l.cod_postal, l.denominacion, d.calle, d.altura " +
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select n.dni, n.nombre, n.apellido, l.cod_postal, l.denominacion, d.calle, d.altura " +
 					"from localidad l " + 
 					"inner join direccion d on d.cod_postal = l.cod_postal " + 
 					"inner join nutricionista n on n.dni = d.id_nutricionista " + 
-					"where l.denominacion = ?");
+					"where l.denominacion = ?"
+					);
 			stmt.setString(1, loc.getDenominacion());
 			rs = stmt.executeQuery();
 			
@@ -193,34 +198,7 @@ public class DataNutricionista {
 			}
 		}
 	}
-	
-	public void updateDireccion(Nutricionista nut) {
-		PreparedStatement stmt = null;
-		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"update direccion "
-					+ "set cod_postal = ?, calle = ?, altura = ?, piso = ?, depto = ? "
-					+ "where id_nutricionista = ?" 
-					);
-			stmt.setInt(1, nut.getDireccion().getLocalidad().getCodPostal());
-			stmt.setString(2, nut.getDireccion().getCalle());
-			stmt.setInt(3, nut.getDireccion().getAltura());
-			stmt.setInt(4, nut.getDireccion().getPiso());
-			stmt.setString(5, nut.getDireccion().getDepto());
-			stmt.setString(5, nut.getDni());
-			stmt.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(stmt!=null) stmt.close();
-				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
+		
 	public void remove(Nutricionista nut) {
 		PreparedStatement stmt = null;
 		try {

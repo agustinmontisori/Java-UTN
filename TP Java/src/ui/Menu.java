@@ -31,17 +31,20 @@ public class Menu {
 
 	private void executeCommand(String command) {
 		switch (command) {
-		case "nutricionista-getAll":
+		case "1":
+			mostrarNutricionistas();
 			break;
-		case "nutricionista-getByDni":
+		case "2":
+			buscarNutricionista();
 			break;
-		case "nutricionista-getByLocalidad":
+		case "3":
+			buscarNutricionistaLocalidad();
 			break;
-		case "nutricionista-add":
+		case "4":
 			break;
-		case "nutricionista-update":
+		case "5":
 			break;
-		case "nutricionista-remove":
+		case "6":
 			break;
 		default:
 			break;
@@ -50,36 +53,50 @@ public class Menu {
 
 	private String getCommand() {
 		System.out.println("Ingrese el comando según la opción que desee realizar");
-		System.out.println("nutricionista-getAll");
-		System.out.println("nutricionista-getByDni\t\t"); 
-		System.out.println("nutricionista-getByLocalidad");
-		System.out.println("nutricionista-add");
-		System.out.println("nutricionista-update");
-		System.out.println("nutricionista-remove");
+		System.out.println("1 nutricionista-getAll");
+		System.out.println("2 nutricionista-getByDni"); 
+		System.out.println("3 nutricionista-getByLocalidad");
+		System.out.println("4 nutricionista-add");
+		System.out.println("5 nutricionista-update");
+		System.out.println("6 nutricionista-remove");
 		System.out.println("--------------------");
-		System.out.println("direccion-setDireccion");
-		System.out.println("direccion-update");
+		System.out.println("7 direccion-setDireccion");
+		System.out.println("8 direccion-update");
 		System.out.println("--------------------");
-		System.out.println("localidad-setLocalidad");
+		System.out.println("9 localidad-setLocalidad");
 
 		System.out.print("\nComando: ");
 		return s.nextLine();
 	}
 	
+	private void mostrarNutricionistas() {
+		LinkedList<Nutricionista> nuts = abmcNutricionista.getAll();
+		for (Nutricionista nut : nuts) {
+			System.out.println(nut);
+		}
+	}
 	
-//	private Persona find() {
-//		System.out.println();
-//		Persona p=new Persona();
-//		Documento d=new Documento();
-//		p.setDocumento(d);
-//		System.out.print("Tipo doc: ");
-//		d.setTipo(s.nextLine());
-//
-//		System.out.print("Nro doc: ");
-//		d.setNro(s.nextLine());
-//		
-//		return ctrlLogin.getByDocumento(p);
-//	}
+	private void buscarNutricionista() {
+		System.out.println();
+		Nutricionista nut = new Nutricionista();
+		System.out.print("DNI: ");
+		nut.setDni(s.nextLine());
+		nut = abmcNutricionista.getByDni(nut);
+		System.out.println(nut);
+	}
+	
+	public void buscarNutricionistaLocalidad() {
+		System.out.println();
+		Localidad loc = new Localidad();
+		System.out.print("Localidad: ");
+		loc.setDenominacion(s.nextLine());
+		LinkedList<Nutricionista> nuts = abmcNutricionista.getByLocalidad(loc);
+		if(nuts.isEmpty()) {
+			System.out.println("No existen nutricionitas registrados en esa localidad");
+		} else {
+			System.out.println(nuts);
+		}
+	}
 //	
 //	private ArrayList<Persona> search() {
 //		System.out.println();

@@ -12,33 +12,19 @@ public class DataNutricionista {
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select n.dni, n.nombre, n.apellido, n.email, n.telefono, d.cod_postal, d.calle, l.denominacion, d.altura, d.piso, d.depto " + 
-					"from nutricionista n " + 
-					"inner join direccion d on d.id_nutricionista = n.dni " + 
-					"inner join localidad l on d.cod_postal = l.cod_postal");
+			rs = stmt.executeQuery("select dni, nombre, apellido, email, telefono " + 
+					"from nutricionista"
+					);
 			//intencionalmente no se recupera la password
 			if(rs != null) {
 				while(rs.next()) {
 					Nutricionista n = new Nutricionista();
-					Direccion d = new Direccion();
-					Localidad l = new Localidad();
-					
-					l.setCodPostal(rs.getInt("cod_postal"));
-					l.setDenominacion(rs.getString("denominacion"));
-					
-					d.setCalle(rs.getString("calle"));
-					d.setAltura(rs.getInt("altura"));
-					d.setPiso(rs.getInt("piso"));
-					d.setDepto(rs.getString("depto"));
-					d.setLocalidad(l);
-					
-					n.setDireccion(new Direccion());
+
 					n.setDni(rs.getString("dni"));
 					n.setNombre(rs.getString("nombre"));
 					n.setApellido(rs.getString("apellido"));
 					n.setEmail(rs.getString("email"));
 					n.setTelefono(rs.getString("telefono"));
-					n.setDireccion(d);
 
 					nuts.add(n);
 				}
@@ -97,6 +83,7 @@ public class DataNutricionista {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
+		DataDireccion dd = new DataDireccion();
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -111,24 +98,12 @@ public class DataNutricionista {
 			
 			if(rs != null) {
 				while(rs.next()) {
-					Nutricionista n = new Nutricionista();
-					Direccion d = new Direccion();
-					Localidad l = new Localidad();
-					
-					l.setCodPostal(rs.getInt("cod_postal"));
-					l.setDenominacion(rs.getString("denominacion"));
-					
-					d.setCalle(rs.getString("calle"));
-					d.setAltura(rs.getInt("altura"));
-					d.setLocalidad(l);
-										
-					n.setDireccion(new Direccion());
-					n.setDni(rs.getString("dni"));
-					n.setNombre(rs.getString("nombre"));
-					n.setApellido(rs.getString("apellido"));
-					n.setDireccion(d);
-
-					nuts.add(n);
+					Nutricionista nut = new Nutricionista();
+					nut.setDni(rs.getString("dni"));
+					nut.setNombre(rs.getString("nombre"));
+					nut.setApellido(rs.getString("apellido"));
+					dd.setDireccion(nut);
+					nuts.add(nut);
 				}
 			}
 			

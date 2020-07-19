@@ -8,14 +8,12 @@ import entidades.*;
 
 public class DataDireccion {
 	
-	public void setDireccion(Nutricionista nut) {
+	public Nutricionista setDireccion(Nutricionista nut) {
 		
 		// recibe por parametro un nutricionista y le asigna la dirección que le corresponde, almacenada en bd
 		
 		PreparedStatement stmt=null;
-		DataLocalidad dl = new DataLocalidad();
 		ResultSet rs=null;	
-		Direccion d = new Direccion();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					  "select cod_postal, calle, altura, piso, depto "
@@ -25,6 +23,8 @@ public class DataDireccion {
 			stmt.setString(1, nut.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null) {
+				DataLocalidad dl = new DataLocalidad();
+				Direccion d = new Direccion();
 				d.setCalle(rs.getString("calle"));
 				d.setDepto(rs.getString("depto"));
 				d.setPiso(rs.getInt("piso"));
@@ -43,6 +43,7 @@ public class DataDireccion {
 				e.printStackTrace();
 			}
 		}
+		return nut;
 	}
 	
 	public void updateDireccion(Nutricionista nut) {

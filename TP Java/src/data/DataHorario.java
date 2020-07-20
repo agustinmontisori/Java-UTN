@@ -47,7 +47,8 @@ public class DataHorario {
 	}
 	
 	public void add(Nutricionista nut) {
-		PreparedStatement stmt= null;
+		// recibe un nutricionista, almacena todos sus horarios en la bd
+		PreparedStatement stmt = null;
 		for (Horario h : nut.getHorarios()) {
 			try {
 				stmt = DbConnector.getInstancia().getConn().
@@ -72,16 +73,17 @@ public class DataHorario {
 		}
 	}
 	
-	public void update(Nutricionista nut, Horario hor) {
+	public void update(Nutricionista nut, Horario updatedHor) {
 		PreparedStatement stmt= null;
+		Horario hor = nut.getHorarios().get(0);
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
 							"update horario set hora_desde = ?, hora_hasta = ? "
 							+ "where id_nutricionista = ? and dia = ? and hora_desde = ?"
 							);
-			stmt.setTime(1, Time.valueOf(hor.getHoraDesde()));
-			stmt.setTime(2, Time.valueOf(hor.getHoraHasta()));
+			stmt.setTime(1, Time.valueOf(updatedHor.getHoraDesde()));
+			stmt.setTime(2, Time.valueOf(updatedHor.getHoraHasta()));
 			stmt.setString(3, nut.getDni());
 			stmt.setString(4, hor.getDia());
 			stmt.setTime(5, Time.valueOf(hor.getHoraDesde()));
@@ -98,24 +100,26 @@ public class DataHorario {
 		}
 	}
 	
-	public void remove(Nutricionista nut, Horario hor) {
+	public void remove(Nutricionista nut) {
 		PreparedStatement stmt = null;
-		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"delete from horario where id_nutricionista = ? and dia = ? and hora_desde = ?"
-					);
-			stmt.setString(1, nut.getDni());
-			stmt.setString(2, hor.getDia());
-			stmt.setTime(3, Time.valueOf(hor.getHoraDesde()));
-			stmt.execute();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
+		for(Horario hor : nut.getHorarios()) {
 			try {
-				if(stmt!=null) stmt.close();
-                DbConnector.getInstancia().releaseConn();
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(
+						"delete from horario where id_nutricionista = ? and dia = ? and hora_desde = ?"
+						);
+				stmt.setString(1, nut.getDni());
+				stmt.setString(2, hor.getDia());
+				stmt.setTime(3, Time.valueOf(hor.getHoraDesde()));
+				stmt.execute();
 			} catch(SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if(stmt!=null) stmt.close();
+	                DbConnector.getInstancia().releaseConn();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

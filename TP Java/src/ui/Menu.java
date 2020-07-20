@@ -9,8 +9,10 @@ import logic.*;
 
 public class Menu {
 	Scanner s=null;
+	AbmcLocalidad abmcLocalidad = new AbmcLocalidad();
 	AbmcDireccion abmcDireccion = new AbmcDireccion();
 	AbmcNutricionista abmcNutricionista = new AbmcNutricionista();
+	AbmcHorario abmcHorario = new AbmcHorario();
 	UsuarioLogic usuarioLogic = new UsuarioLogic();
 
 	public void start() {
@@ -50,6 +52,27 @@ public class Menu {
 		case "6":
 			removeNutricionista();
 			break;
+		case "7":
+			updateDireccion();
+			break;
+		case "8":
+			agregarLocalidad();
+			break;
+		case "9":
+			updateLocalidad();
+			break;
+		case "10":
+			removeLocalidad();
+			break;
+		case "11":
+			agregarHorario();
+			break;
+		case "12":
+			updateHorario();
+			break;
+		case "13":
+			removeHorario();
+			break;
 		default:
 			break;
 		}
@@ -63,6 +86,13 @@ public class Menu {
 		System.out.println("4 nutricionista-add");
 		System.out.println("5 nutricionista-update");
 		System.out.println("6 nutricionista-remove");
+		System.out.println("7 direccion-update");
+		System.out.println("8 localidad-add");
+		System.out.println("9 localidad-update");
+		System.out.println("10 localidad-remove");
+		System.out.println("11 horario-add");
+		System.out.println("12 horario-update");
+		System.out.println("13 horario-remove");
 
 		System.out.print("\nComando: ");
 		return s.nextLine();
@@ -148,14 +178,135 @@ public class Menu {
 	}
 	
 	public void updateNutricionista() {
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni: ");
+		n.setDni(s.nextLine());
+		System.out.print("apellido: ");
+		n.setApellido(s.nextLine());
+		System.out.print("nombre: ");
+		n.setNombre(s.nextLine());
+		System.out.print("email: ");
+		n.setEmail(s.nextLine());
+		System.out.print("telefono: ");
+		n.setTelefono(s.nextLine());
+		System.out.print("password: ");
+		n.setPassword(s.nextLine());
 		
+		abmcNutricionista.update(n);
 	}
 	
 	public void removeNutricionista() {
-		
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni: ");
+		n.setDni(s.nextLine());
+		abmcNutricionista.remove(n);
 	}
 	
-//	
+	public void updateDireccion() {
+		Direccion d = new Direccion();
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni: ");
+		n.setDni(s.nextLine());
+		System.out.print("calle: ");
+		d.setCalle(s.nextLine());
+		System.out.print("altura");
+		d.setAltura(Integer.parseInt(s.nextLine()));
+		System.out.print("piso");
+		d.setPiso(Integer.parseInt(s.nextLine()));
+		System.out.println("depto");
+		d.setDepto(s.nextLine());
+		
+		abmcDireccion.updateDireccion(n);
+	}
+	
+	public void agregarLocalidad() {
+		Localidad l = new Localidad();
+		System.out.print("codigo postal: ");
+		l.setCodPostal(Integer.parseInt(s.nextLine()));
+		System.out.print("denominacion: ");
+		l.setDenominacion(s.nextLine());
+		abmcLocalidad.agregarLocalidad(l);
+	}
+	
+	public void updateLocalidad() {
+		Localidad l = new Localidad();
+		System.out.print("codigo postal: ");
+		l.setCodPostal(Integer.parseInt(s.nextLine()));
+		System.out.print("nueva denominacion: ");
+		l.setDenominacion(s.nextLine());
+		abmcLocalidad.updateLocalidad(l);
+	}
+	
+	public void removeLocalidad() {
+		Localidad l = new Localidad();
+		System.out.print("codigo postal: ");
+		l.setCodPostal(Integer.parseInt(s.nextLine()));
+		abmcLocalidad.removeLocalidad(l);
+	}
+	
+	public void agregarHorario() {
+		ArrayList<Horario> horarios = new ArrayList<>();
+		Horario h;
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni nutricionista: ");
+		n.setDni(s.nextLine());
+		do {
+			h = new Horario();
+			System.out.print("dia: ");
+			h.setDia(s.nextLine());
+			System.out.print("hora desde: ");
+			h.setHoraDesde(LocalTime.parse(s.nextLine()));
+			System.out.print("hora hasta: ");
+			h.setHoraHasta(LocalTime.parse(s.nextLine()));
+			horarios.add(h);
+			System.out.println();
+			System.out.print("continua? (si/no)");
+		} while(s.nextLine().equalsIgnoreCase("si"));
+		n.setHorarios(horarios);
+		abmcHorario.agregarHorarios(n);
+	}
+	
+	public void updateHorario() {
+		ArrayList<Horario> horarios = new ArrayList<>();
+		Horario h = new Horario();
+		Horario updatedHor = new Horario();
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni nutricionista: ");
+		n.setDni(s.nextLine());
+		System.out.print("dia: ");
+		h.setDia(s.nextLine());
+		System.out.print("hora desde: ");
+		h.setHoraDesde(LocalTime.parse(s.nextLine()));
+		System.out.print("nueva hora desde: ");
+		updatedHor.setHoraDesde(LocalTime.parse(s.nextLine()));
+		System.out.print("nueva hora hasta: ");
+		updatedHor.setHoraHasta(LocalTime.parse(s.nextLine()));
+		horarios.add(h);
+		n.setHorarios(horarios);
+		abmcHorario.updateHorarios(n, updatedHor);
+	}
+	
+	public void removeHorario() {
+		ArrayList<Horario> horarios = new ArrayList<>();
+		Horario h;
+		Nutricionista n = new Nutricionista();
+		System.out.print("dni nutricionista: ");
+		n.setDni(s.nextLine());
+		do {
+			h = new Horario();
+			System.out.print("dia: ");
+			h.setDia(s.nextLine());
+			System.out.print("hora desde: ");
+			h.setHoraDesde(LocalTime.parse(s.nextLine()));
+			horarios.add(h);
+			System.out.println();
+			System.out.print("continua? (si/no)");
+		} while(s.nextLine().equalsIgnoreCase("si"));
+		n.setHorarios(horarios);
+		abmcHorario.removeHorarios(n);
+	}
+	
+	//	
 //	private ArrayList<Persona> search() {
 //		System.out.println();
 //		Persona p = new Persona();

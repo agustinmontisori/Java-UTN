@@ -12,4 +12,7 @@ public class AbmcDireccion {
 	public void setDireccion(Nutricionista nut) {
 		dd.setDireccion(nut);
 	}
+	public void updateDireccion(Nutricionista nut) {
+		dd.update(nut);
+	}
 }

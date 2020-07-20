@@ -13,14 +13,22 @@
                     <div class="card-body">
                         <h2>Registrarse</h2>
                         <form>
-                            <input type="radio" id="paciente" name="tipo_usuario" value="paciente">
-                            <label for="paciente">Quiero un nutricionista</label>
-                            <input type="radio" id="nutricionista" name="tipo_usuario" value="nutricionista">
-                            <label for="nutricionista">Soy un nutricionista</label><br><br>
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre"><br><br>
-                            <label for="apellido">Apellido</label>
-                            <input type="text" id="apellido" name="apellido"><br><br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="paciente" name="tipo_usuario" value="paciente">
+                                <label for="paciente" class="form-check-label">Quiero un nutricionista</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="nutricionista" name="tipo_usuario" value="nutricionista">
+                                <label for="nutricionista" class="form-check-label">Soy un nutricionista</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido">
+                            </div>
                             <label for="email">Correo electrónico</label>
                             <input type="email" id="email" name="email"><br><br>
                             <label for="telefono">Teléfono</label>

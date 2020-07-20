@@ -16,7 +16,7 @@ public class Nutricionista extends Usuario {
 	public void setHorarios(ArrayList<Horario> horarios) {
 		this.horarios = horarios;
 	}
-	public ArrayList<Horario> getHorariosAtencion() {
+	public ArrayList<Horario> getHorarios() {
 		return horarios;
 	}
 	@Override

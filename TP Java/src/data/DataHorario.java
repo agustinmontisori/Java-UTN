@@ -2,6 +2,7 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 
 import entidades.*;
 import java.util.ArrayList;
@@ -21,12 +22,12 @@ public class DataHorario {
 					);
 			stmt.setString(1, nut.getDni());
 			rs= stmt.executeQuery();
-			if(rs!=null) {
+			if(rs != null) {
 				while(rs.next()) {
 					h = new Horario();
 					h.setDia(rs.getString("dia"));
-					h.setHoraDesde(rs.getTime("hora_desde"));
-					h.setHoraHasta(rs.getTime("hora_hasta"));
+					h.setHoraDesde(rs.getTime("hora_desde").toLocalTime());
+					h.setHoraHasta(rs.getTime("hora_hasta").toLocalTime());
 					horarios.add(h);
 				}
 				nut.setHorarios(horarios);
@@ -45,27 +46,29 @@ public class DataHorario {
 		return nut;
 	}
 	
-	public void add(Horario hor, Nutricionista nut) {
+	public void add(Nutricionista nut) {
 		PreparedStatement stmt= null;
-		try {
-			stmt=DbConnector.getInstancia().getConn().
-					prepareStatement(
-							"insert into horario (id_nutricionista, dia, hora_desde, hora_hasta) values (?,?,?,?)"
-							);
-			stmt.setString(1, nut.getDni());
-			stmt.setString(2, hor.getDia());
-			stmt.setTime(3, hor.getHoraDesde());
-			stmt.setTime(4, hor.getHoraHasta());
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-            e.printStackTrace();
-		} finally {
-            try {
-                if(stmt!=null)stmt.close();
-                DbConnector.getInstancia().releaseConn();
-            } catch (SQLException e) {
-            	e.printStackTrace();
-            }
+		for (Horario h : nut.getHorarios()) {
+			try {
+				stmt = DbConnector.getInstancia().getConn().
+						prepareStatement(
+								"insert into horario (id_nutricionista, dia, hora_desde, hora_hasta) values (?,?,?,?)"
+								);
+				stmt.setString(1, nut.getDni());
+				stmt.setString(2, h.getDia());
+				stmt.setTime(3, Time.valueOf(h.getHoraDesde()));
+				stmt.setTime(4, Time.valueOf(h.getHoraHasta()));
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+	            e.printStackTrace();
+			} finally {
+	            try {
+	                if(stmt!=null)stmt.close();
+	                DbConnector.getInstancia().releaseConn();
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
+			}
 		}
 	}
 	
@@ -77,11 +80,11 @@ public class DataHorario {
 							"update horario set hora_desde = ?, hora_hasta = ? "
 							+ "where id_nutricionista = ? and dia = ? and hora_desde = ?"
 							);
-			stmt.setTime(1, hor.getHoraDesde());
-			stmt.setTime(2, hor.getHoraHasta());
+			stmt.setTime(1, Time.valueOf(hor.getHoraDesde()));
+			stmt.setTime(2, Time.valueOf(hor.getHoraHasta()));
 			stmt.setString(3, nut.getDni());
 			stmt.setString(4, hor.getDia());
-			stmt.setTime(5, hor.getHoraDesde());
+			stmt.setTime(5, Time.valueOf(hor.getHoraDesde()));
 			stmt.executeUpdate();
 		} catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +106,7 @@ public class DataHorario {
 					);
 			stmt.setString(1, nut.getDni());
 			stmt.setString(2, hor.getDia());
-			stmt.setTime(3, hor.getHoraDesde());
+			stmt.setTime(3, Time.valueOf(hor.getHoraDesde()));
 			stmt.execute();
 		} catch(SQLException e) {
 			e.printStackTrace();

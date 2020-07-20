@@ -7,24 +7,17 @@ import java.sql.SQLException;
 import entidades.*;
 
 public class DataLocalidad {
-	public void setLocalidad(Nutricionista nut) {
+	public void setLocalidad(Localidad loc) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;	
-		Localidad l = new Localidad();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					  "select l.denominacion, l.cod_postal "
-					+ "from localidad l "
-					+ "inner join direccion d "
-					+ "on l.cod_postal = d.cod_postal "
-					+ "where d.id_nutricionista = ?"
+					"select denominacion from localidad where cod_postal = ?"
 					);
-			stmt.setString(1, nut.getDni());
-			rs= stmt.executeQuery();
-			if(rs!=null) {
-				l.setCodPostal(rs.getInt("cod_postal"));
-				l.setDenominacion(rs.getString("denominacion"));
-				nut.getDireccion().setLocalidad(l);
+			stmt.setInt(1, loc.getCodPostal());
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+				loc.setDenominacion(rs.getString("denominacion"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,18 +1,14 @@
 package logic;
 
-import data.DataDireccion;
 import data.DataNutricionista;
 import java.util.LinkedList;
 
 import entidades.Localidad;
 import entidades.Nutricionista;
-
 public class AbmcNutricionista {
 	private DataNutricionista dn;
-	private DataDireccion dd;
 	public AbmcNutricionista() {
 		dn = new DataNutricionista();
-		dd = new DataDireccion();
 	}
 	
 	public LinkedList<Nutricionista> getAll(){
@@ -20,9 +16,7 @@ public class AbmcNutricionista {
 	}
 	
 	public Nutricionista getByDni(Nutricionista nut) {
-		nut = dn.getByDni(nut);
-		nut = dd.setDireccion(nut);
-		return nut;
+		return dn.getByDni(nut);
 	}
 	
 	public LinkedList<Nutricionista> getByLocalidad(Localidad loc){

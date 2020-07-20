@@ -37,8 +37,8 @@ public class Direccion {
 	public void setPiso(int piso) {
 		this.piso = piso;
 	}
-//	@Override
-//	public String toString{
-//		return "[cod postal=" + localidad.getCodPostal() + ", denominacion=" + localidad.getDenominacion() + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso + ", depto=" + depto +"]";
-//	}
+	@Override
+	public String toString(){
+		return "[cod postal=" + localidad.getCodPostal() + ", denominacion=" + localidad.getDenominacion() + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso + ", depto=" + depto +"]";
+	}
 }

@@ -1,20 +1,20 @@
 package entidades;
-import java.sql.Time;
+import java.time.LocalTime;
 public class Horario {
-	private Time horaDesde;
-	private Time horaHasta;
+	private LocalTime horaDesde;
+	private LocalTime horaHasta;
 	private String dia;
 	
-	public Time getHoraDesde() {
+	public LocalTime getHoraDesde() {
 		return horaDesde;
 	}
-	public void setHoraDesde(Time horaDesde) {
+	public void setHoraDesde(LocalTime horaDesde) {
 		this.horaDesde = horaDesde;
 	}
-	public Time getHoraHasta() {
+	public LocalTime getHoraHasta() {
 		return horaHasta;
 	}
-	public void setHoraHasta(Time horaHasta) {
+	public void setHoraHasta(LocalTime horaHasta) {
 		this.horaHasta = horaHasta;
 	}
 	public String getDia() {
@@ -24,6 +24,9 @@ public class Horario {
 		this.dia = dia;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "[dia=" + dia + ", desde=" + horaDesde + ", hasta=" + horaHasta + "]";
+	}
 	
 }

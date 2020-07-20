@@ -5,11 +5,16 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class DataNutricionista {
+
+	DataHorario dh = new DataHorario();
+	DataDireccion dd = new DataDireccion();
 	
 	public LinkedList<Nutricionista> getAll(){
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
+	
+		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("select dni, nombre, apellido, email, telefono " + 
@@ -19,13 +24,13 @@ public class DataNutricionista {
 			if(rs != null) {
 				while(rs.next()) {
 					Nutricionista n = new Nutricionista();
-
 					n.setDni(rs.getString("dni"));
 					n.setNombre(rs.getString("nombre"));
 					n.setApellido(rs.getString("apellido"));
 					n.setEmail(rs.getString("email"));
 					n.setTelefono(rs.getString("telefono"));
-
+					n = dd.setDireccion(n);
+					n = dh.setHorarios(n);
 					nuts.add(n);
 				}
 			}
@@ -52,7 +57,7 @@ public class DataNutricionista {
 
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select dni,nombre,apellido from nutricionista where dni = ?"
+					"select dni,nombre,apellido,email,telefono from nutricionista where dni = ?"
 					);
 			stmt.setString(1, nut.getDni());
 			rs = stmt.executeQuery();
@@ -60,7 +65,11 @@ public class DataNutricionista {
 				n = new Nutricionista();
 				n.setApellido(rs.getString("apellido"));
 				n.setNombre(rs.getString("nombre"));
+				n.setEmail(rs.getString("email"));
+				n.setTelefono(rs.getString("telefono"));
 				n.setDni(nut.getDni());
+				n = dd.setDireccion(n);
+				n = dh.setHorarios(n);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,7 +92,6 @@ public class DataNutricionista {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
-		DataDireccion dd = new DataDireccion();
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -135,6 +143,8 @@ public class DataNutricionista {
 			stmt.setString(5, nut.getTelefono());
 			stmt.setString(6, nut.getEmail());
 			stmt.execute();
+			dd.add(nut);
+			dh.add(nut);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

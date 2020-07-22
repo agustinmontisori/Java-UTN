@@ -1,18 +1,18 @@
 package entidades;
 
 public class Alimento {
-	int codigo;
+	int id;
 	String nombre;
 	float calorias;
 	float proteinas;
 	float grasas;
 	float carbohidratos;
 	String unidadMedida;
-	public int getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -49,6 +49,13 @@ public class Alimento {
 	}
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
+	}
+	
+	@Override
+	public String toString() {
+		String s = "\nAlimento [id="+ id + ", nombre=" + nombre + ", calorias=" + calorias
+				+ ", proteinas=" + proteinas + ", grasas=" + grasas + ", carbohidratos=" + carbohidratos +"]";
+		return s;
 	}
 	
 }

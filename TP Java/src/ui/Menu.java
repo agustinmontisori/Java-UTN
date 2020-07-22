@@ -73,26 +73,34 @@ public class Menu {
 		case "13":
 			removeHorario();
 			break;
+		case "14":
+			mostrarAlimentos();
 		default:
 			break;
 		}
 	}
 
 	private String getCommand() {
-		System.out.println("Ingrese el comando segÃºn la opciÃ³n que desee realizar");
-		System.out.println("1 nutricionista-getAll");
-		System.out.println("2 nutricionista-getByDni"); 
-		System.out.println("3 nutricionista-getByLocalidad");
-		System.out.println("4 nutricionista-add");
-		System.out.println("5 nutricionista-update");
-		System.out.println("6 nutricionista-remove");
-		System.out.println("7 direccion-update");
-		System.out.println("8 localidad-add");
-		System.out.println("9 localidad-update");
-		System.out.println("10 localidad-remove");
-		System.out.println("11 horario-add");
-		System.out.println("12 horario-update");
-		System.out.println("13 horario-remove");
+		System.out.println("Ingrese el comando según la opción que desee realizar");
+		System.out.println("NUTRICIONISTA:");
+		System.out.println("1 getAll");
+		System.out.println("2 getByDni"); 
+		System.out.println("3 getByLocalidad");
+		System.out.println("4 add");
+		System.out.println("5 update");
+		System.out.println("6 remove");
+		System.out.println("DIRECCIÓN:");
+		System.out.println("7 update");
+		System.out.println("LOCALIDAD:");
+		System.out.println("8 add");
+		System.out.println("9 update");
+		System.out.println("10 remove");
+		System.out.println("HORARIO:");
+		System.out.println("11 add");
+		System.out.println("12 update");
+		System.out.println("13 remove");
+		System.out.println("ALIMENTO:");
+		System.out.println("14 getAll");
 
 		System.out.print("\nComando: ");
 		return s.nextLine();
@@ -126,6 +134,7 @@ public class Menu {
 			System.out.println(nuts);
 		}
 	}
+	
 	public void agregarNutricionista() {
 		Nutricionista n = new Nutricionista();
 		Localidad l = new Localidad();
@@ -306,6 +315,13 @@ public class Menu {
 		abmcHorario.removeHorarios(n);
 	}
 	
+	public void mostrarAlimentos() {
+		AlimentoLogic al = new AlimentoLogic();
+		LinkedList<Alimento> alimentos = al.GetAll();
+		for (Alimento a : alimentos) {
+			System.out.println(a);
+		}
+	}
 	//	
 //	private ArrayList<Persona> search() {
 //		System.out.println();

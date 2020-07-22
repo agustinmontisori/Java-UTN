@@ -1,0 +1,23 @@
+body,html{
+    height:100%;
+}
+
+h2{
+    font-weight: bold;
+}
+
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.form-sheet{
+    margin-top:4rem; margin-bottom:4rem
+}
+
+.paciente{
+    background-color: #9fdfcd;
+}
+
+.login{
+    background-color: #6fad9c;
+}

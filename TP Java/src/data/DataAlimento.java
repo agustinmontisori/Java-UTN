@@ -40,4 +40,39 @@ public class DataAlimento {
 		}
 		return alimentos;
 	}
+	
+	public Alimento GetOne(int id) {
+		Alimento a = new Alimento();
+		a.setId(id);
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT * FROM alimento WHERE id_alimento = ?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+				a.setNombre(rs.getString("nombre"));
+				a.setCalorias(rs.getInt("calorias"));
+				a.setGrasas(rs.getFloat("grasas"));
+				a.setProteinas(rs.getFloat("proteinas"));
+				a.setCarbohidratos(rs.getFloat("carbohidratos"));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) { rs.close(); }
+				if (stmt != null) { stmt.close(); }
+				DbConnector.getInstancia().releaseConn();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return a;
+	}
 }

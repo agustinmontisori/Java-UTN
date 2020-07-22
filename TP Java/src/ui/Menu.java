@@ -75,13 +75,16 @@ public class Menu {
 			break;
 		case "14":
 			mostrarAlimentos();
+			break;
+		case "15":
+			buscarAlimento();
 		default:
 			break;
 		}
 	}
 
 	private String getCommand() {
-		System.out.println("Ingrese el comando según la opción que desee realizar");
+		System.out.println("Ingrese número correspondiente al comando que desea ejecutar.");
 		System.out.println("NUTRICIONISTA:");
 		System.out.println("1 getAll");
 		System.out.println("2 getByDni"); 
@@ -101,6 +104,7 @@ public class Menu {
 		System.out.println("13 remove");
 		System.out.println("ALIMENTO:");
 		System.out.println("14 getAll");
+		System.out.println("15 getOne");
 
 		System.out.print("\nComando: ");
 		return s.nextLine();
@@ -321,6 +325,14 @@ public class Menu {
 		for (Alimento a : alimentos) {
 			System.out.println(a);
 		}
+	}
+	
+	public void buscarAlimento() {
+		AlimentoLogic al = new AlimentoLogic();
+		System.out.print("ID: ");
+		int id = Integer.parseInt(s.nextLine());
+		Alimento a = al.GetOne(id);
+		System.out.println(a);
 	}
 	//	
 //	private ArrayList<Persona> search() {

@@ -14,4 +14,8 @@ public class AlimentoLogic {
 	public LinkedList<Alimento> GetAll(){
 		return da.GetAll();
 	}
+	
+	public Alimento GetOne(int id) {
+		return da.GetOne(id);
+	}
 }

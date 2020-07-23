@@ -21,3 +21,7 @@ body{
 .login{
     background-color: #6fad9c;
 }
+
+.container-fluid{
+    background-image: url("PNG image.png");
+}

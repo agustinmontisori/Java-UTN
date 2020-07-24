@@ -23,5 +23,5 @@ body{
 }
 
 .container-fluid{
-    background-image: url("PNG image.png");
+    background-color: grey;
 }

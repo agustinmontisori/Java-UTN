@@ -6,6 +6,10 @@ h2{
     font-weight: bold;
 }
 
+h1{
+    font-weight: bold;
+}
+
 body{
     font-family: 'Nunito', sans-serif;
 }
@@ -19,9 +23,9 @@ body{
 }
 
 .login{
-    background-color: #6fad9c;
+    background-color: grey;
 }
 
 .container-fluid{
-    background-color: grey;
+    padding: 2rem;
 }

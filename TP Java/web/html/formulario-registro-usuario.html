@@ -7,23 +7,19 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
 </head>
-<body>
-</body>
-    <div class="container-fluid paciente">
+<body class="paciente">
+    <div class="container-fluid">
         <div class="row">
             <div class="col"></div>
             <div class = "col-5">
+                <h1>Registrarse</h1>
                 <div class="card form-sheet col">
                     <div class="card-body">
-                        <h2>Registrarse</h2>
                         <form>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="paciente" name="tipo_usuario" value="paciente">
-                                <label for="paciente" class="form-check-label">Quiero un nutricionista</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="nutricionista" name="tipo_usuario" value="nutricionista">
-                                <label for="nutricionista" class="form-check-label">Soy un nutricionista</label>
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-primary btn-group-btn">Soy un nutricionista</button>
+                                <button type="button" class="btn btn-secondary btn-group-btn">Quiero un nutricionista</button>
+
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
@@ -61,4 +57,5 @@
             <div class="col"></div>
         </div>
     </div>
+</body>
 </html>

@@ -14,12 +14,23 @@ body{
     font-family: 'Nunito', sans-serif;
 }
 
-.form-sheet{
-    margin-top:4rem; margin-bottom:4rem
+.paciente{
+    --primary-color: #b9f6ca;
+    --primary-light: #ecfffd;
+    --primary-dark: #88c399;
+    --secondary-color: #ff5252;
+    --secondary-light: #ff867f;
+    --secondary-dark: #c50e29;
+    background-color: var(--primary-color);
 }
 
-.paciente{
-    background-color: #9fdfcd;
+.nutricionista{
+    --primary-color: #ff8a80;
+    --primary-light: #ffbcaf;
+    --primary-dark: #c85a54;
+    --secondary-color: #69f0ae;
+    --secondary-light: #9fffe0;
+    --secondary-dark: #2bbd7e;
 }
 
 .login{
@@ -28,4 +39,33 @@ body{
 
 .container-fluid{
     padding: 2rem;
+}
+
+.btn.btn-primary{
+    background-color: var(--secondary-color);
+    border: none;
+}
+.btn.btn-primary:active{
+    background-color: var(--secondary-dark) !important;
+}
+.btn:active{
+    box-shadow:none !important;
+}
+
+.btn-primary.btn-group-btn{
+    background-color: var(--secondary-color);
+    border: none;
+}
+
+.btn-group-btn{
+    margin-bottom: 1rem;
+}
+
+.btn-secondary.btn-group-btn{
+    color: black;
+    background-color: lightgray;
+    border: none;
+}
+.btn-secondary.btn-group-btn:hover{
+    background-color: var(--primary-light);
 }

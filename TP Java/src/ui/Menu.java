@@ -14,6 +14,7 @@ public class Menu {
 	AbmcNutricionista abmcNutricionista = new AbmcNutricionista();
 	AbmcHorario abmcHorario = new AbmcHorario();
 	UsuarioLogic usuarioLogic = new UsuarioLogic();
+	AbmcEjercicio abmcEjercicio = new AbmcEjercicio();
 
 	public void start() {
 		s = new Scanner(System.in);
@@ -78,6 +79,18 @@ public class Menu {
 			break;
 		case "15":
 			buscarAlimento();
+		case "16":
+			agregarEjercicio();
+			break;
+		case "17":
+			removeEjercicio();
+			break;
+		case "18":
+			updateEjercicio();
+			break;
+		case "19":
+			mostrarEjercicios();
+			break;
 		default:
 			break;
 		}
@@ -105,6 +118,11 @@ public class Menu {
 		System.out.println("ALIMENTO:");
 		System.out.println("14 getAll");
 		System.out.println("15 getOne");
+		System.out.println("EJERCICIO");
+		System.out.println("16 add");
+		System.out.println("17 remove");
+		System.out.println("18 update");
+		System.out.println("19 getall");
 
 		System.out.print("\nComando: ");
 		return s.nextLine();
@@ -334,6 +352,55 @@ public class Menu {
 		Alimento a = al.GetOne(id);
 		System.out.println(a);
 	}
+	
+	public void agregarEjercicio() {
+		System.out.println();
+		Ejercicio e = new Ejercicio();
+		
+		System.out.print("Codigo: ");
+		e.setId_ejercicio(Integer.parseInt(s.nextLine()));
+		
+		System.out.print("Nombre: ");
+		e.setNombre(s.nextLine());
+		
+		System.out.print("Gasto energetico: ");
+		e.setGasto_energetico(Integer.parseInt(s.nextLine()));
+
+		abmcEjercicio.agregarEjercicio(e);
+		
+	}
+	
+	public void removeEjercicio() {
+		System.out.println();
+		Ejercicio e = new Ejercicio();
+		System.out.print("codigo: ");
+		e.setId_ejercicio(Integer.parseInt(s.nextLine()));
+		
+		abmcEjercicio.removeEjercicio(e);		
+	}
+	
+	public void updateEjercicio() {
+		System.out.println();
+		Ejercicio e = new Ejercicio();
+		System.out.print("Id ejercicio: ");
+		e.setId_ejercicio(Integer.parseInt(s.nextLine()));
+		System.out.print("Nuevo nombre: ");
+		e.setNombre(s.nextLine());
+		System.out.println("Nuevo gasto energetico");
+		e.setGasto_energetico(Integer.parseInt(s.nextLine()));
+		
+		abmcEjercicio.updateEjercicio(e);
+	}
+	
+	public void mostrarEjercicios() {
+		System.out.println();
+		LinkedList<Ejercicio> ejs = abmcEjercicio.getAll();
+		for (Ejercicio e : ejs) {
+			System.out.println(e);
+		}
+	}
+	
+	
 	//	
 //	private ArrayList<Persona> search() {
 //		System.out.println();
